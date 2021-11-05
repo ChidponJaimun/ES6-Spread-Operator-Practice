@@ -1,32 +1,41 @@
 import React, { useState } from "react";
 
 function App() {
-  const [task, setTask] = useState("");
+  const [inputText, setInputText] = useState("");
+  const [items, setItems] = useState([]);
 
   function textHandle(event) {
     const textBox = event.target.value;
-    setTask(textBox);
-    console.log(task);
+    setInputText(textBox);
+    console.log(inputText);
   }
 
-  function buttonHandle() {}
+  function buttonHandle() {
+    setItems((abc) => {
+      //input variable in setItem is mean prevValue
+      return [...abc, inputText];
+    });
+    setInputText("");
+  }
 
   return (
     <div className="container">
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <form action={buttonHandle}>
-        <div className="form">
-          <input type="text" onChange={textHandle} />
-          <button type="submit">
-            <span>Add</span>
-          </button>
-        </div>
-      </form>
+
+      <div className="form">
+        <input type="text" onChange={textHandle} value={inputText} />
+        <button type="submit" onClick={buttonHandle}>
+          <span>Add</span>
+        </button>
+      </div>
+
       <div>
         <ul>
-          <li>A Item </li>
+          {items.map((todoItem) => {
+            return <li>{todoItem}</li>;
+          })}
         </ul>
       </div>
     </div>
