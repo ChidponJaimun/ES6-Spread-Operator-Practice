@@ -34,7 +34,7 @@ function App() {
       <div>
         <ul>
           {items.map((todoItem) => {
-            return <li>{todoItem}</li>;
+            return <li key={todoItem.id}>{todoItem}</li>;
           })}
         </ul>
       </div>
